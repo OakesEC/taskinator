@@ -1,5 +1,3 @@
-console.dir(window.document);
-
 var buttonE1 = document.querySelector("#save-task");
 var taskToDoE1 = document.querySelector("#tasks-to-do");
 
