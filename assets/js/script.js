@@ -1,5 +1,5 @@
-var formE1 = document.querySelector("#task-form");
-var taskToDoE1 = document.querySelector("#tasks-to-do");
+var formEl = document.querySelector("#task-form");
+var taskToDoEl = document.querySelector("#tasks-to-do");
 
 var createTaskHandler = function(event) {
     event.preventDefault();
@@ -7,7 +7,7 @@ var createTaskHandler = function(event) {
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
     listItemEl.textContent = "This is a new task.";
-    taskToDoE1.appendChild(listItemEl);
+    taskToDoEl.appendChild(listItemEl);
 };
 
 formEl.addEventListener("submit", createTaskHandler);
