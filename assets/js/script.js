@@ -53,23 +53,22 @@ var createTaskEl = function(taskDataObj) {
         var actionContainerEl = document.createElement("div");
         actionContainerEl.className = "task-actions";
    
-        // create edit button 
+       // create edit button
         var editButtonEl = document.createElement("button");
         editButtonEl.textContent = "Edit";
         editButtonEl.className = "btn edit-btn";
         editButtonEl.setAttribute("data-task-id", taskId);
 
         actionContainerEl.appendChild(editButtonEl);
-   
+
         // create delete button
         var deleteButtonEl = document.createElement("button");
         deleteButtonEl.textContent = "Delete";
-        deleteButtonEl.className = "btn-delete-btn";
+        deleteButtonEl.className = "btn delete-btn";
         deleteButtonEl.setAttribute("data-task-id", taskId);
-        actionContainerEl.appendChild(editButtonEl);
 
         actionContainerEl.appendChild(deleteButtonEl);
-        
+
         return actionContainerEl;
     };
 
