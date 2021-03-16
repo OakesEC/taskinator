@@ -5,6 +5,13 @@ var tasksToDoEl = document.querySelector("#tasks-to-do");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
 var pageContentEl = document.querySelector("#page-content");
+var tasks = []; 
+// do i need this?
+var pushedArr = [1,2,3];
+pushedArr.push(4);
+pushedArr.push("Taskinator")
+pushedArr.push(10, "push", false);
+
 
 var taskFormHandler = function(event) {
   event.preventDefault();
@@ -24,13 +31,17 @@ var taskFormHandler = function(event) {
   // check if task is new or one being edited by seeing if it has a data-task-id attribute
   var isEdit = formEl.hasAttribute("data-task-id");
 
+  // has data attribute, so get task id and call function to complete edit process
   if (isEdit) {
     var taskId = formEl.getAttribute("data-task-id");
     completeEditTask(taskNameInput, taskTypeInput, taskId);
+
+    // no data attribute, so create object as normal and pass to createTaskEl function
   } else {
     var taskDataObj = {
       name: taskNameInput,
-      type: taskTypeInput
+      type: taskTypeInput,
+      status: "to do"
     };
 
     createTaskEl(taskDataObj);
@@ -51,9 +62,15 @@ var createTaskEl = function(taskDataObj) {
   var taskActionsEl = createTaskActions(taskIdCounter);
   listItemEl.appendChild(taskActionsEl);
   tasksToDoEl.appendChild(listItemEl);
+ 
+  taskDataObj.id = taskIdCounter;
+
+  tasks.push(taskDataObj);
 
   // increase task counter for next unique id
   taskIdCounter++;
+  console.log(taskDataObj);
+  console.log;(taskDataObj.status);
 };
 
 var createTaskActions = function(taskId) {
@@ -103,6 +120,14 @@ var completeEditTask = function(taskName, taskType, taskId) {
   taskSelected.querySelector("h3.task-name").textContent = taskName;
   taskSelected.querySelector("span.task-type").textContent = taskType;
 
+  // loop through the tasks array and task object with new content
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === parseInt(taskId)) {
+      tasks[i].name = taskName;
+      tasks[i].type = taskType;
+    }
+  }
+
   alert("Task Updated!");
 
   // remove data attribute from form
@@ -124,6 +149,8 @@ var taskButtonHandler = function(event) {
     var taskId = targetEl.getAttribute("data-task-id");
     deleteTask(taskId);
   }
+  
+  console.log(tasks)
 };
 
 var taskStatusChangeHandler = function(event) {
@@ -147,7 +174,7 @@ var taskStatusChangeHandler = function(event) {
 };
 
 
-var editTask = function(taskId) {
+var editTask = function(taskId) 
   console.log(taskId);
 
   // get task list item element
